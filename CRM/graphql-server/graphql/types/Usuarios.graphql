@@ -1,5 +1,4 @@
 module.exports =`
-
   type Usuario {
     id: ID
     nombre: String
