@@ -20,4 +20,4 @@ server.listen().then(({ url }) => {
   console.log(`Server run dev ${url}`);
 });
 
-module.exports = typeDefs;
+
