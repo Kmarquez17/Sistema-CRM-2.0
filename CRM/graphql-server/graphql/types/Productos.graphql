@@ -1,0 +1,29 @@
+module.exports =`
+
+    type Producto {
+        id: ID
+        nombre: String
+        existencia: Int
+        precio: Float
+        creado: String
+    }
+
+    input ProductoInput{
+        nombre: String!
+        existencia: Int!
+        precio: Float!
+    }
+
+    type Query {
+        # Productos
+
+        obtenerProductos: [Producto]
+        obtenerProducto(id: ID!): Producto
+    }
+  
+    type Mutation {
+        # Productos
+
+        nuevoProducto(input: ProductoInput) : Producto
+    }
+`;     
