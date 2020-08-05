@@ -1,5 +1,14 @@
 const Producto = require("../../models/Producto");
 
+// const verificarProducto = async (id) => {
+//   const producto = await Producto.findById(id);
+//   if (!producto) {
+//     throw new Error("Producto no encontrado...!");
+//   }
+
+//   return producto;
+// };
+
 module.exports = ProductosResolvers = {
   Query: {
     obtenerProductos: async () => {
@@ -13,9 +22,6 @@ module.exports = ProductosResolvers = {
     obtenerProducto: async (_, { id }) => {
       //Revisar si el producto existe
       const producto = await Producto.findById(id);
-      if (!/^[0-9a-fA-F]{24}$/.test(id)) {
-        throw new Error("No es un ID valido");
-      }
       if (!producto) {
         throw new Error("Producto no encontrado...!");
       }
@@ -33,6 +39,36 @@ module.exports = ProductosResolvers = {
       } catch (error) {
         console.log(error);
       }
+    },
+    actualizarProducto: async (_, { id, input }) => {
+      //Revisar si el producto existe
+      let producto = await Producto.findById(id);
+
+      if (!producto) {
+        throw new Error("Producto no encontrado...!");
+      }
+
+      //Actualizarlo en la base de datos
+
+      producto = await Producto.findByIdAndUpdate({ _id: id }, input, {
+        new: true,
+      });
+
+      return producto;
+    },
+
+    eliminarProducto: async (_, { id }) => {
+      //Revisar si el producto existe
+      let producto = await Producto.findById(id);
+
+      if (!producto) {
+        throw new Error("Producto no encontrado...!");
+      }
+
+      //Eliminamos el producto
+      await Producto.findByIdAndDelete({ _id: id });
+
+      return "Producto eliminado...!";
     },
   },
 };
