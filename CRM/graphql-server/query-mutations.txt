@@ -1,0 +1,121 @@
+mutation nuevoUsuario($input:UsuarioInput ){
+  nuevoUsuario(input: $input){
+    id
+    nombre
+    apellido
+    email
+    creado
+  }
+}
+
+mutation autenticarUsuario($input: AutenticarInput){
+  autenticarUsuario(input: $input) {
+  	token
+  }
+  
+}
+
+mutation nuevoProducto($input: ProductoInput) {
+  nuevoProducto(input: $input){
+    id
+    nombre
+    existencia
+    precio
+    creado
+  }  
+}
+
+query obtenerUsuario($token: String!) {
+  obtenerUsuario(token: $token){
+    id
+    nombre
+    apellido
+    email
+  }
+}
+
+query obtenerProductos {
+  obtenerProductos {
+    id
+    nombre
+    existencia
+    precio
+    creado
+  }
+}
+
+query obtenerProducto($id: ID!) {
+  obtenerProducto(id: $id) {
+    id
+    nombre
+    existencia
+    precio
+    creado
+  }
+}
+
+  mutation actualizarProducto($id: ID!, $input: ProductoInput){
+    actualizarProducto(id: $id,input: $input){
+      id
+      nombre
+      existencia
+      precio
+      creado
+    }
+  }     
+
+  mutation eliminarProducto($id: ID!){
+  eliminarProducto(id: $id)
+}
+
+mutation nuevoCliente ($input: ClienteInput){
+  nuevoCliente (input: $input) {
+    id
+    nombre
+    apellido
+    empresa
+    email
+    vendedor
+  }
+}
+
+query obtenerClientes {
+  obtenerClientes {
+    id
+    nombre
+    apellido
+    email
+    telefono
+    vendedor
+  }
+}
+
+query obtenerClientesVendedor {
+  obtenerClientesVendedor {
+    id
+    nombre
+    apellido
+    email
+    telefono
+    vendedor
+  }
+}
+
+query obtenerCliente($id: ID!){
+  obtenerCliente(id:$id){
+    id
+    nombre    
+  }
+}
+
+
+  mutation actualizarCliente($id: ID!, $input: ClienteInput){
+    actualizarCliente(id: $id,input: $input){
+      id
+      nombre
+      apellido
+      empresa
+      email
+      vendedor       
+    }
+  }     

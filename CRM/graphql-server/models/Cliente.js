@@ -9,7 +9,7 @@ const ClienteSchema = mongoose.Schema({
 
   apellido: {
     type: String,
-    require: true, 
+    require: true,
     trim: true,
   },
   empresa: {
