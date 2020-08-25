@@ -1,0 +1,40 @@
+module.exports =`
+    type Pedido {
+        id: ID
+        pedido: [PedidoGrupo]
+        total: Float
+        cliente: ID
+        vendedor: ID
+        estado: EstadoPedido
+        creado: String
+    }
+
+    type PedidoGrupo {
+        id: ID
+        cantidad: Int
+    }
+
+    input PedidoInpout{ 
+        pedido: [PedidoProductoInput]
+        total: Float!
+        cliente: ID!
+        estado: EstadoPedido
+    }
+
+    enum EstadoPedido { 
+        PENDIENTE
+        COMPLETADO
+        CANCELADO
+    }
+
+    input PedidoProductoInput {
+        id: ID,
+        cantidad: Int
+    }
+
+    type Mutation { 
+        nuevoPedido(input: PedidoInpout): Pedido
+    }
+
+
+`;     

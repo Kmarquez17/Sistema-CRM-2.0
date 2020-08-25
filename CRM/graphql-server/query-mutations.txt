@@ -118,4 +118,24 @@ query obtenerCliente($id: ID!){
       email
       vendedor       
     }
-  }     
+  }   
+    
+mutation eliminarCliente($id: ID!){
+  eliminarCliente(id: $id)
+}  
+
+
+mutation nuevoPedido($input: PedidoInpout) {
+  nuevoPedido(input: $input){
+    id
+    pedido{
+      id
+      cantidad
+    }
+    total
+    cliente
+    vendedor
+    estado
+    creado    
+  }
+}

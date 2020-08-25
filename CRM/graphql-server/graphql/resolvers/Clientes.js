@@ -2,7 +2,8 @@ const Cliente = require("../../models/Cliente");
 
 module.exports = ClientesResolvers = {
   Query: {
-    obtenerClientes: async () => {
+    obtenerClientes: async (_, {}, ctx) => {
+      //console.log(ctx);
       if (!ctx.usuario) {
         throw new Error("El usuario ya no esta Authorizado...!");
       }
