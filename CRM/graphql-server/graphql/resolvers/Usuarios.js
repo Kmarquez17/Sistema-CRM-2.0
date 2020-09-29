@@ -61,7 +61,7 @@ module.exports = UsuariosResolvers = {
       }
 
       return {
-        token: crearToken(existeUsuario, process.env.SECRETA, "5h"),
+        token: crearToken(existeUsuario, process.env.SECRETA, "30d"),
       };
 
       //crear el token

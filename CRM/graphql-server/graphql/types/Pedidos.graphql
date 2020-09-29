@@ -14,10 +14,10 @@ module.exports =`
         cantidad: Int
     }
 
-    input PedidoInpout{ 
+    input PedidoInput{ 
         pedido: [PedidoProductoInput]
-        total: Float!
-        cliente: ID!
+        total: Float
+        cliente: ID
         estado: EstadoPedido
     }
 
@@ -31,10 +31,19 @@ module.exports =`
         id: ID,
         cantidad: Int
     }
+    
+
+    type Query {
+        # pedidos
+        obtenerPedidos : [Pedido]  
+        obtenerPedidosVendedor : [Pedido]  
+        obtenerPedido (id: ID!) : Pedido
+        obtenerPedidosEstado (estado: String!): [Pedido] 
+    } 
 
     type Mutation { 
-        nuevoPedido(input: PedidoInpout): Pedido
+        nuevoPedido(input: PedidoInput): Pedido
+        actualizarPedido(id: ID!, input: PedidoInput): Pedido
+        eliminarPedido(id: ID!): String
     }
-
-
 `;     
