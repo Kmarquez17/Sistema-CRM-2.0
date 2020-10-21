@@ -1,4 +1,5 @@
 const Cliente = require("../../models/Cliente");
+const Pedido = require("../../models/Pedido");
 
 module.exports = ClientesResolvers = {
   Query: {
@@ -44,6 +45,37 @@ module.exports = ClientesResolvers = {
         throw new Error("Este cliente no esta asociado a tu cuenta...!");
       }
       return cliente;
+    },
+    obtenerMejoresClientes: async (_, {}, ctx) => {
+      // if (!ctx.usuario) {
+      //   throw new Error("El usuario ya no esta Authorizado...!");
+      // }
+
+      const clientes = await Pedido.aggregate([
+        { $match: { estado: "COMPLETADO" } },
+        {
+          $group: {
+            _id: "$cliente",
+            total: { $sum: "$total" },
+          },
+        },
+        {
+          $lookup: {
+            from: "clientes",
+            localField: "_id",
+            foreignField: "_id",
+            as: "cliente",
+          },
+        },
+        {
+          $limit: 10,
+        },
+        {
+          $sort: { total: -1 },
+        },
+      ]);
+
+      return clientes;
     },
   },
   Mutation: {

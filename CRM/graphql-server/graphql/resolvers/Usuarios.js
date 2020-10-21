@@ -1,4 +1,5 @@
 const Usuario = require("../../models/Usuario");
+const Pedido = require("../../models/Pedido");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -16,6 +17,37 @@ module.exports = UsuariosResolvers = {
     obtenerUsuario: async (_, { token }) => {
       const usuarioID = await jwt.verify(token, process.env.SECRETA);
       return usuarioID;
+    },
+    obtenerMejoresVendedores: async (_, {}, ctx) => {
+      // if (!ctx.usuario) {
+      //   throw new Error("El usuario ya no esta Authorizado...!");
+      // }
+
+      const vendedores = await Pedido.aggregate([
+        { $match: { estado: "COMPLETADO" } },
+        {
+          $group: {
+            _id: "$vendedor",
+            total: { $sum: "$total" },
+          },
+        },
+        {
+          $lookup: {
+            from: "usuarios",
+            localField: "_id",
+            foreignField: "_id",
+            as: "vendedor",
+          },
+        },
+        {
+          $limit: 3,
+        },
+        {
+          $sort: { total: -1 },
+        },
+      ]);
+
+      return vendedores;
     },
   },
   Mutation: {

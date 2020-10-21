@@ -10,6 +10,11 @@ module.exports =`
         vendedor: ID
     }
 
+    type TopCliente {
+        total: Float
+        cliente: [Cliente]
+    }
+
     input ClienteInput {
         nombre: String!
         empresa: String!
@@ -21,7 +26,11 @@ module.exports =`
     type Query { 
         obtenerClientes: [Cliente]
         obtenerClientesVendedor: [Cliente]
-        obtenerCliente(id: ID!): Cliente        
+        obtenerCliente(id: ID!): Cliente 
+
+
+        #Busquedas Avanzadas 
+        obtenerMejoresClientes:[TopCliente]
     } 
     type Mutation {
         nuevoCliente (input: ClienteInput) : Cliente

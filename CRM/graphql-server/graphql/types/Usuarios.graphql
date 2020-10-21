@@ -11,6 +11,11 @@ module.exports =`
     token: String
   }
 
+  type TopVendedor { 
+    total: Float
+    vendedor: [Usuario]
+  }
+
   input UsuarioInput {
     nombre: String
     apellido: String
@@ -21,8 +26,13 @@ module.exports =`
     email: String!
     password: String!
   }
+
+
   type Query {    
     obtenerUsuario(token: String!): Usuario
+    
+    #Busquedas Avanzadas 
+    obtenerMejoresVendedores:[TopVendedor]
   }
   type Mutation {
     nuevoUsuario (input: UsuarioInput) : Usuario

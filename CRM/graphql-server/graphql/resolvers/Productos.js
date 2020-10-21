@@ -28,6 +28,10 @@ module.exports = ProductosResolvers = {
 
       return producto;
     },
+    buscarProductos: async (_, { texto }) => {
+      const productos = await Producto.find({ $text: { $search: texto } }).limit(10)
+      return productos;
+    },
   },
   Mutation: {
     nuevoProducto: async (_, { input }) => {

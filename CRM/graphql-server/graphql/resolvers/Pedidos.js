@@ -3,7 +3,7 @@ const Producto = require("../../models/Producto");
 const Cliente = require("../../models/Cliente");
 
 const verificarUsuario = (usuario) => {
-  //Verificar si el pedido existe
+  //Verificar si el pedido existe  
   if (!usuario) {
     throw new Error("El usuario ya no esta Authorizado...!");
   }
@@ -68,6 +68,8 @@ module.exports = PedidosResolvers = {
     nuevoPedido: async (_, { input }, ctx) => {
       const { cliente } = input;
       verificarUsuario(ctx.usuario);
+
+      // console.log(ctx.usuario);
 
       //Verificar si el cliente existe o no
       let clienteExiste = await Cliente.findById(cliente);

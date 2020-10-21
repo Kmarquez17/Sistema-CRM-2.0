@@ -1,5 +1,4 @@
 module.exports =`
-
     type Producto {
         id: ID
         nombre: String
@@ -17,8 +16,9 @@ module.exports =`
     type Query {
         # Productos
 
+        obtenerProducto(id: ID!): Producto 
         obtenerProductos: [Producto]
-        obtenerProducto(id: ID!): Producto        
+        buscarProductos(texto: String!): [Producto]      
     }
   
     type Mutation {
