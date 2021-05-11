@@ -14,9 +14,8 @@ const crearToken = (usuario, secreta, expiresIn) => {
 
 module.exports = UsuariosResolvers = {
   Query: {
-    obtenerUsuario: async (_, { token }) => {
-      const usuarioID = await jwt.verify(token, process.env.SECRETA);
-      return usuarioID;
+    obtenerUsuario: async (_, {}, ctx) => {      
+      return ctx.usuario;
     },
     obtenerMejoresVendedores: async (_, {}, ctx) => {
       // if (!ctx.usuario) {

@@ -29,7 +29,7 @@ module.exports =`
 
 
   type Query {    
-    obtenerUsuario(token: String!): Usuario
+    obtenerUsuario: Usuario
     
     #Busquedas Avanzadas 
     obtenerMejoresVendedores:[TopVendedor]
