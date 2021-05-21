@@ -13,7 +13,7 @@ const USUARIO_LOGUEADO = gql`
 
 const Header = () => {
   const router = useRouter();
-  const { data, loading, error } = useQuery(USUARIO_LOGUEADO);
+  const { data, loading, client } = useQuery(USUARIO_LOGUEADO);
 
   if (loading) return null;
 
@@ -24,9 +24,10 @@ const Header = () => {
   const { nombre, apellido } = data.obtenerUsuario;
 
   const cerrarSesion = () => {
+    client.clearStore()
     localStorage.removeItem("token");
     router.push("/login");
-    return null;
+    return null; 
   };
 
   return (
