@@ -11,6 +11,6 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "apollo-server": "^2.16.0"
+        "apollo-server": "^2.25.4"
     }
 }
